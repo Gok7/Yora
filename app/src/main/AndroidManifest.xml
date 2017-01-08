@@ -16,6 +16,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.LoginActivity"/>
+
+        <activity android:name=".activities.LoginNarrowActivity"/>
+
+        <activity android:name=".activities.RegisterActivity"/>
+
+        <activity android:name=".activities.ExternalLoginActivity"/>
     </application>
 
 </manifest>

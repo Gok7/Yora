@@ -72,7 +72,7 @@ public class NavDrawer {
         if (selectedItem != null) {
             selectedItem.setSelected(false);
         } else {
-            setSelectedItem(item);
+            selectedItem = item;
             selectedItem.setSelected(true);
         }
 
@@ -129,6 +129,8 @@ public class NavDrawer {
             }
 
             view = inflater.inflate(R.layout.list_item_nav_drawer, container);
+            view.setOnClickListener(this);
+
             icon = (ImageView) view.findViewById(R.id.list_item_nav_drawer_icon);
             textView = (TextView) view.findViewById(R.id.list_item_nav_drawer_text);
             badgeTextView = (TextView) view.findViewById(R.id.list_item_nav_drawer_badge);

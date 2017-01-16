@@ -7,41 +7,46 @@
     tools:context=".activities.LoginActivity">
 
     <include
+        android:id="@+id/include_id_login"
         layout="@layout/include_login_header"
-        android:id="@+id/include_login_header"/>
+        />
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/include_login_header"
+        android:layout_below="@+id/include_id_login"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:gravity="center_vertical"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/activity_login_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Yora! Log in"
-            android:id="@+id/activity_login_login"/>
+            android:text="Log in" />
 
         <Button
+            android:id="@+id/activity_login_facebook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Yora ! register"
-            android:id="@+id/activity_login_register"/>
+            android:text="Facebook log in"
+            />
 
         <Button
+            android:id="@+id/activity_login_google"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Facebook Log in"
-            android:id="@+id/activity_login_facebook"/>
+            android:text="Google+ log in"
+            />
 
         <Button
+            android:id="@+id/activity_login_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Google log in "
-            android:id="@+id/activity_login_google"/>
+            android:text="Register" />
 
 
     </LinearLayout>

@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <include
-        layout="@layout/include_login_header"/>
+    <include layout="@layout/include_login_header" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,51 +13,51 @@
         android:padding="16dp">
 
         <EditText
+            android:id="@+id/activity_register_userName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:hint="User Name"
-            android:maxLines="1"
-            android:layout_marginBottom="8dp"
-            android:id="@+id/activity_register_userName"/>
+            android:singleLine="true" />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email"
-            android:maxLines="1"
-            android:layout_marginBottom="8dp"
             android:id="@+id/activity_register_email"
-            android:layout_below="@+id/activity_register_userName"
-            android:inputType="textEmailAddress"/>
-
-        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
-            android:maxLines="1"
-            android:layout_marginBottom="8dp"
+            android:layout_below="@+id/activity_register_userName"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:singleLine="true" />
+
+        <EditText
             android:id="@+id/activity_register_password"
-            android:layout_below="@+id/activity_register_email"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/activity_register_email"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:singleLine="true" />
 
         <Button
+            android:id="@+id/activity_register_registerButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/activity_register_password"
+            android:background="@color/colorAccent"
             android:text="Register"
-            android:background="@color/colorPrimaryDark"
-            android:textColor="#ffffff"
-            android:layout_below="@+id/activity_register_password"
-            android:id="@+id/activity_register_registerButton"/>
+            android:textColor="@android:color/white" />
 
         <ProgressBar
+            android:id="@+id/activity_register_progressBar"
+            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:indeterminateOnly="true"
-            android:id="@+id/activity_register_progressBar"
+            android:layout_alignBottom="@id/activity_register_registerButton"
+            android:layout_alignTop="@id/activity_register_registerButton"
             android:layout_centerHorizontal="true"
-            android:layout_alignTop="@+id/activity_register_registerButton"
-            android:layout_alignBottom="@+id/activity_register_registerButton"/>
-
+            android:indeterminateOnly="true" />
 
     </RelativeLayout>
+
 
 </LinearLayout>

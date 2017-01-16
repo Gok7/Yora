@@ -3,17 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/colorPrimary"
+    android:elevation="5dp"
+    >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="YORA!"
-        android:textStyle="bold"
-        android:textSize="24sp"
-        android:paddingTop="50dp"
-        android:paddingBottom="50dp"
         android:layout_gravity="center_horizontal"
-        android:textColor="#ffffff"/>
+        android:paddingBottom="50dp"
+        android:paddingTop="50dp"
+        android:text="Yora"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        />
 
 </FrameLayout>

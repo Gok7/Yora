@@ -5,66 +5,76 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <include
-        android:id="@+id/include_login_header"
-        layout="@layout/include_login_header"/>
+        android:id="@+id/include_id_login"
+        layout="@layout/include_login_header"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
+        android:layout_below="@+id/include_id_login"
         android:layout_centerHorizontal="true"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:gravity="center"
         android:orientation="vertical"
-        android:layout_below="@id/include_login_header"
-        android:gravity="center">
-
+        >
+        
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#dddddd"
             android:padding="16dp"
-            android:background="#dddddd">
+            >
 
-            <fragment
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:name="fr.imerir.yora.fragments.LoginFragment"
-                android:id="@+id/activity_login_fragment"
-                tools:layout="@layout/fragment_login" />
+           <fragment
+               android:name="fr.imerir.yora.fragments.LoginFragment"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               tools:layout="@layout/fragment_login" />
 
         </FrameLayout>
 
         <Button
+            android:id="@+id/login_activity_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            />
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Yora ! Register"
-            android:id="@+id/activity_login_register"/>
+            android:orientation="horizontal"
+            >
 
-            <LinearLayout
+            <Button
+                android:id="@+id/login_activity_facebook"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal">
+                android:layout_weight="1"
+                android:text="Facebook log in"
+                />
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Facebook Log in"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    android:id="@+id/activity_login_facebook"/>
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    android:text="Google Log in"
-                    android:id="@+id/activity_login_google"/>
+            <Button
+                android:id="@+id/login_activity_google"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Google log in"
+                />
 
-            </LinearLayout>
+
+        </LinearLayout>
+
 
     </LinearLayout>
+
+
 
 </RelativeLayout>

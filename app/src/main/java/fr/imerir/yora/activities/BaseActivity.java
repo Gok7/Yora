@@ -42,4 +42,9 @@ public abstract class BaseActivity extends AppCompatActivity{
     public Toolbar getToolbar(){
         return toolbar;
     }
+
+    public YoraApplication getYoraApplication(){
+
+        return application;
+    }
 }

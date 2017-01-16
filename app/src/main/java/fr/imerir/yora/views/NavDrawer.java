@@ -128,7 +128,9 @@ public class NavDrawer {
                         "could not be attached to viewgroup. view not found");
             }
 
-            view = inflater.inflate(R.layout.list_item_nav_drawer, container);
+            view = inflater.inflate(R.layout.list_item_nav_drawer, container,false);
+            container.addView(view);
+
             view.setOnClickListener(this);
 
             icon = (ImageView) view.findViewById(R.id.list_item_nav_drawer_icon);

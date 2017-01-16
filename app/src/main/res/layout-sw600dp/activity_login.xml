@@ -38,7 +38,7 @@
         </FrameLayout>
 
         <Button
-            android:id="@+id/login_activity_register"
+            android:id="@+id/activity_login_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Register"
@@ -53,7 +53,7 @@
             >
 
             <Button
-                android:id="@+id/login_activity_facebook"
+                android:id="@+id/activity_login_facebook"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -62,7 +62,7 @@
 
 
             <Button
-                android:id="@+id/login_activity_google"
+                android:id="@+id/activity_login_google"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

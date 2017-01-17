@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.soundcloud.android.crop.Crop;
+import com.squareup.otto.Subscribe;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import java.util.List;
 import fr.imerir.yora.R;
 import fr.imerir.yora.dialogs.ChangePasswordDialog;
 import fr.imerir.yora.infrastructure.User;
+import fr.imerir.yora.services.Account;
 import fr.imerir.yora.views.MainNavDrawer;
 
 
@@ -154,9 +156,15 @@ public class ProfileActivity extends BaseAuthenticatedActivity implements View.O
 
             //todo : send tempsFileUri to server as new avatar
 
-            avatarView.setImageResource(0);
-            avatarView.setImageURI(Uri.fromFile(tempOutputFile));
+            avatarProgressFrame.setVisibility(View.VISIBLE);
+            bus.post(new Account.ChangeAvatarRequest(Uri.fromFile(tempOutputFile)));
         }
+    }
+
+    @Subscribe
+    public void onAvatarUpdated(Account.ChangeAvatarResponse response) {
+        avatarProgressFrame.setVisibility(View.GONE);
+        //todo : handle errors
     }
 
     @Override

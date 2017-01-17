@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.View;
 
+import com.squareup.otto.Bus;
+
 import fr.imerir.yora.R;
 import fr.imerir.yora.infrastructure.YoraApplication;
 import fr.imerir.yora.views.NavDrawer;
@@ -18,16 +20,25 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected Toolbar toolbar;
     protected NavDrawer navDrawer;
     protected boolean isTablet;
-
+    protected Bus bus;
 
     @Override
     protected void onCreate(Bundle savedState) {
         super.onCreate(savedState);
 
         application = (YoraApplication) getApplication();
+        bus = application.getBus();
 
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         isTablet = (metrics.widthPixels / metrics.density) >= 600;
+
+        bus.register(this); //register baseActivivity on our onCreate to the bus
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        bus.unregister(this);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package fr.imerir.yora.activities;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.imerir.yora.R;
+import fr.imerir.yora.dialogs.ChangePasswordDialog;
 import fr.imerir.yora.infrastructure.User;
 import fr.imerir.yora.views.MainNavDrawer;
 
@@ -164,13 +166,22 @@ public class ProfileActivity extends BaseAuthenticatedActivity implements View.O
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {//when user select something on actionbar
 
         int itemId = item.getItemId();
 
         if (itemId == R.id.activity_profile_menuEdit) {
             changeState(STATE_EDITING);
             return true;
+        } else if (itemId == R.id.activity_profile_menuChangePassword) {
+            //when we hit back key transaction will be undone
+            FragmentTransaction transaction = getFragmentManager()
+                    .beginTransaction()
+                    .addToBackStack(null);
+
+            ChangePasswordDialog dialog = new ChangePasswordDialog();
+            dialog.show(transaction, null);
+            return true;//indicate that we handled the options menu to the OS
         }
         return false;
     }

@@ -227,15 +227,19 @@ public class NavDrawer {
 
             navDrawer.setOpen(false);
 
-            if (navDrawer.activity.getClass() == targetActivity) {
+            final BaseActivity activity = navDrawer.activity;
+            if (activity.getClass() == targetActivity) {
                 return;
             }
             super.onClick(view);
 
-            //TODO : animations
-
-            navDrawer.activity.startActivity(new Intent(navDrawer.activity, targetActivity));
-            navDrawer.activity.finish();
+            activity.fadeOut(new BaseActivity.FadeOutListener() {
+                @Override
+                public void onFadeOutEnd() {
+                    activity.startActivity(new Intent(activity, targetActivity));
+                    activity.finish();
+                }
+            });
         }
     }
 }

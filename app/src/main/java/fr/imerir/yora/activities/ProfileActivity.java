@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -188,6 +189,9 @@ public class ProfileActivity extends BaseAuthenticatedActivity implements View.O
         displayNameText.setError(response.getPropertyError("displayName"));
         emailText.setError(response.getPropertyError("email"));
         setProgressBarVisible(false);
+
+        Log.e("InMemoryAccountService", "Got Response");
+
     }
 
     private void setProgressBarVisible(boolean visible) {

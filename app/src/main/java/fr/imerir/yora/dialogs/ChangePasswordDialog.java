@@ -65,6 +65,9 @@ public class ChangePasswordDialog extends BaseDialogFragment implements View.OnC
     @Subscribe
     public void passwordChanged(Account.ChangePasswordResponse response) {
 
+        progressDialog.dismiss();
+        progressDialog = null;
+
         if (response.didSucceed()) {
             Toast.makeText(getActivity(), "Password Updated", Toast.LENGTH_SHORT).show();
             dismiss();
@@ -79,3 +82,4 @@ public class ChangePasswordDialog extends BaseDialogFragment implements View.OnC
         response.showErrorToast(getActivity());
     }
 }
+

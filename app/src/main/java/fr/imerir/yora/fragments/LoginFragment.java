@@ -54,3 +54,15 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
         void onLoggedIn();
     }
 }
+
+//We want to hook this service layer. Authentication token. API call to webservice.
+//Inbox : we want to list our inbox : we need to hit API endpoint online on some sort of service
+//we want to send a token, information that indicates that we are logged in and we are authenticated
+//kind a like a cookie would work if you were using a browser.
+//Authentication token : when you log in, the server on the other end is going to generate a random token
+//and hand it back to the application. then the application needs to make another request to the server,
+//it will pass along that authentication token. allowing the server to validate to verify that you are a
+//valid user, more importantly what user you are.
+//We take that auth token to store it in local storage. if you close the application and re-lauch it
+//it will know that you were logged in and re-authenticate itself with the service.
+//that's how we're going to handle this, hell yeah baby.

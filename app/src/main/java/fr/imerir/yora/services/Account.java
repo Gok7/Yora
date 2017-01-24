@@ -130,12 +130,12 @@ public final class Account {
 
     public static class UpdateProfileRequest {
 
-        public String DisplayName;
-        public String Email;
+        public String displayName;
+        public String email;
 
         public UpdateProfileRequest(String displayName, String email) {
-            DisplayName = displayName;
-            Email = email;
+            this.displayName = displayName;
+            this.email = email;
         }
     }
 
@@ -161,11 +161,11 @@ public final class Account {
 
     //event to dispatch to event bus whenever a service call updates an user.
     //example : change user avatar, we let the system know that that happened.
-    public static class userDetailsUpdatedEvent {
+    public static class UserDetailsUpdatedEvent {
 
         public User user;
 
-        public userDetailsUpdatedEvent(User user) {
+        public UserDetailsUpdatedEvent(User user) {
             this.user = user;
         }
     }

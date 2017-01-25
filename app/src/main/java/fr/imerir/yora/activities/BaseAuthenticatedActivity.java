@@ -7,13 +7,24 @@ import android.os.Bundle;
 
 public abstract class BaseAuthenticatedActivity extends BaseActivity {
 
+    private Intent intent;
+
     @Override
-    protected final void onCreate(Bundle savedState){
+    protected final void onCreate(Bundle savedState) {
         super.onCreate(savedState);
 
-        if(!application.getAuth().getUser().isLoggedIn()){
+        if (!application.getAuth().getUser().isLoggedIn()) {
 
-            startActivity(new Intent(this, LoginActivity.class));
+            if (application.getAuth().hasAuthToken()) {
+                intent = new Intent(this, AuthenticationActivity.class);
+                intent.putExtra(
+                        AuthenticationActivity.EXTRA_RETURN_TO_ACTIVITY,
+                        getClass().getName());
+                startActivity(intent);
+            } else {
+                startActivity(new Intent(this, LoginActivity.class));
+            }
+
             finish();
             return;
         }

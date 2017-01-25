@@ -41,7 +41,6 @@ public final class Account {
     }
 
     public static class LoginWithLocalTokenRequest {
-
         public String AuthToken;
 
         public LoginWithLocalTokenRequest(String authToken) {
@@ -71,14 +70,14 @@ public final class Account {
 
     }
 
-    public static class RegisteRequest {
+    public static class RegisterRequest {
 
         public String userName;
         public String email;
         public String password;
         public String clientId;
 
-        public RegisteRequest(String userName, String email, String password) {
+        public RegisterRequest(String userName, String email, String password) {
             this.userName = userName;
             this.email = email;
             this.password = password;

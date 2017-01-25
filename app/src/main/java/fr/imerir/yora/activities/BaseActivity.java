@@ -11,16 +11,18 @@ import android.view.View;
 import com.squareup.otto.Bus;
 
 import fr.imerir.yora.R;
+import fr.imerir.yora.infrastructure.ActionScheduler;
 import fr.imerir.yora.infrastructure.YoraApplication;
 import fr.imerir.yora.views.NavDrawer;
 
 public abstract class BaseActivity extends AppCompatActivity {
-
     protected YoraApplication application;
     protected Toolbar toolbar;
     protected NavDrawer navDrawer;
     protected boolean isTablet;
     protected Bus bus;
+    protected ActionScheduler scheduler;
+    private boolean isRegisteredWithBus;
 
     @Override
     protected void onCreate(Bundle savedState) {
@@ -28,17 +30,53 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         application = (YoraApplication) getApplication();
         bus = application.getBus();
+        scheduler = new ActionScheduler(application);
 
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         isTablet = (metrics.widthPixels / metrics.density) >= 600;
 
         bus.register(this); //register baseActivivity on our onCreate to the bus
+        isRegisteredWithBus = true;
+    }
+
+    public ActionScheduler getScheduler() {
+        return scheduler;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        scheduler.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        scheduler.onPause();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        bus.unregister(this);
+
+        if (isRegisteredWithBus) {
+            bus.unregister(this);
+            isRegisteredWithBus = false;
+        }
+
+
+        if (navDrawer != null)
+            navDrawer.destroy();
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+
+        if (isRegisteredWithBus) {
+            bus.unregister(this);
+            isRegisteredWithBus = false;
+        }
     }
 
     @Override
@@ -103,7 +141,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         return application;
     }
-    public interface FadeOutListener{
+
+    public interface FadeOutListener {
 
         void onFadeOutEnd();
     }

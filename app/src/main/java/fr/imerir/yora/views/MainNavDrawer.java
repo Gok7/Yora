@@ -3,7 +3,8 @@ package fr.imerir.yora.views;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.squareup.otto.Subscribe;
 
 import fr.imerir.yora.R;
 import fr.imerir.yora.activities.BaseActivity;
@@ -12,6 +13,7 @@ import fr.imerir.yora.activities.MainActivity;
 import fr.imerir.yora.activities.ProfileActivity;
 import fr.imerir.yora.activities.SentMessagesActivity;
 import fr.imerir.yora.infrastructure.User;
+import fr.imerir.yora.services.Account;
 
 public class MainNavDrawer  extends  NavDrawer{
 
@@ -30,7 +32,7 @@ public class MainNavDrawer  extends  NavDrawer{
 
             @Override
             public void onClick(View view){
-                Toast.makeText(activity,"You have logged out", Toast.LENGTH_SHORT).show();
+                activity.getYoraApplication().getAuth().logout();
             }
         });
 
@@ -42,4 +44,14 @@ public class MainNavDrawer  extends  NavDrawer{
 
         //TODO: change avatar image to avatarUrl from loggedInUser
     }
+
+    @Subscribe
+    public void onUserDetailsUpdated(Account.UserDetailsUpdatedEvent event) {
+
+        //todo : update avatar url
+
+        displayNameText.setText(event.user.getDisplayName());
+    }
 }
+
+//we want to have mainvavdrawer register event on the bus, to put code that will automatically update text

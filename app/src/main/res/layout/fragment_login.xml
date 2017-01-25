@@ -7,35 +7,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="User Name"
-        android:singleLine="true" />
+        android:maxLines="1" />
 
 
     <EditText
         android:id="@+id/fragment_login_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/fragment_login_userName"
         android:hint="Password"
         android:inputType="textPassword"
-        android:maxLines="1"
-        android:layout_below="@id/fragment_login_userName"
-        android:singleLine="true" />
+        android:maxLines="1" />
 
     <Button
         android:id="@+id/fragment_login_loginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/fragment_login_password"
         android:layout_marginTop="10dp"
         android:background="@color/colorAccent"
         android:text="Log In"
-        android:textColor="@android:color/white"
-        android:layout_below="@id/fragment_login_password" />
+        android:textColor="@android:color/white" />
 
     <ProgressBar
-        android:id="@+id/fragment_login_ProgressBar"
-        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
+        android:id="@+id/fragment_login_progress"
+        style="?android:attr/progressBarStyleInverse"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:indeterminate="true"
+        android:layout_alignBottom="@id/fragment_login_loginButton"
+        android:layout_alignTop="@id/fragment_login_loginButton"
+        android:layout_centerHorizontal="true"
+        android:indeterminateOnly="true"
         android:visibility="gone" />
 
 

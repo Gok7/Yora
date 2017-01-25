@@ -7,13 +7,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+
+import com.squareup.otto.Subscribe;
 
 import fr.imerir.yora.R;
+import fr.imerir.yora.services.Account;
 
 public class LoginFragment extends BaseFragment implements View.OnClickListener {
 
     private Button loginButton;
     private Callbacks callbacks;
+    private View progressBar;
+    private EditText userNameText;
+    private EditText passwordText;
+    private String defaultLoginButtonText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup root, Bundle savedState){
@@ -23,17 +31,46 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
         loginButton = (Button) view.findViewById(R.id.fragment_login_loginButton);
         loginButton.setOnClickListener(this);
 
+        progressBar = view.findViewById(R.id.fragment_login_progress);
+        userNameText = (EditText) view.findViewById(R.id.fragment_login_userName);
+        passwordText = (EditText) view.findViewById(R.id.fragment_login_password);
+        defaultLoginButtonText = loginButton.getText().toString();
+
         return view;
     }
 
     @Override
     public void onClick(View view) {
         if(view == loginButton){
-            //notify parent activity
-            application.getAuth().getUser().setLoggedIn(true);
-            application.getAuth().getUser().setDisplayName("Nelson Laquet");
-            callbacks.onLoggedIn();
+            progressBar.setVisibility(View.VISIBLE);
+            loginButton.setText("");
+            userNameText.setEnabled(false);
+            passwordText.setEnabled(false);
+            loginButton.setEnabled(false);
+
+            bus.post(new Account.LoginWithUserNameRequest(
+                    userNameText.getText().toString(),
+                    passwordText.getText().toString()));
         }
+    }
+
+    @Subscribe
+    public void onLoginWithUsername(Account.LoginWithUserNameResponse response) {
+
+        response.showErrorToast(getActivity());
+
+        if (response.didSucceed()) {
+            callbacks.onLoggedIn();
+            return;
+        }
+
+        userNameText.setError(response.getPropertyError("userName"));
+        userNameText.setEnabled(true);
+        passwordText.setError(response.getPropertyError("password"));
+        passwordText.setEnabled(true);
+        progressBar.setVisibility(View.GONE);
+        loginButton.setText(defaultLoginButtonText);
+        loginButton.setEnabled(true);
     }
 
     @Override

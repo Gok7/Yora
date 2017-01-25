@@ -73,12 +73,16 @@ public class InMemoryAccountService extends BaseInMemoryService {
     }
 
     @Subscribe
-    public void loginWithUserName(Account.LoginWithUserNameRequest request) {
+    public void loginWithUserName(final Account.LoginWithUserNameRequest request) {
 
         invokeDelayed(new Runnable() {
             @Override
             public void run() {
                 Account.LoginWithUserNameResponse response = new Account.LoginWithUserNameResponse();
+
+                if (request.userName.equals("nelson"))
+                    response.setPropertyError("userName", "Invalid username or password");
+
                 //must be invoked first, so auth token has been set before we respond in a positive way
                 loginUser(response);
                 bus.post(response);
@@ -113,7 +117,7 @@ public class InMemoryAccountService extends BaseInMemoryService {
     }
 
     @Subscribe
-    public void register(Account.RegisteRequest request) {
+    public void register(Account.RegisterRequest request) {
 
         invokeDelayed(new Runnable() {
             @Override

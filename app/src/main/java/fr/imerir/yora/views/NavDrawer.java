@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +17,11 @@ import fr.imerir.yora.activities.BaseActivity;
 
 public class NavDrawer {
 
-    private ArrayList<NavDrawerItem> items;
-    private NavDrawerItem selectedItem;
-
     protected BaseActivity activity;
     protected DrawerLayout drawerLayout;
     protected ViewGroup navDrawerView;
+    private ArrayList<NavDrawerItem> items;
+    private NavDrawerItem selectedItem;
 
     public NavDrawer(BaseActivity activity) {
 
@@ -45,6 +43,14 @@ public class NavDrawer {
                 setOpen(!isOpen());
             }
         });
+
+        activity.getYoraApplication().getBus().register(this);
+
+    }
+
+    public void destroy() {
+
+        activity.getYoraApplication().getBus().unregister(this);
     }
 
     public void addItem(NavDrawerItem item) {

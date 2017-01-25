@@ -2,6 +2,7 @@
     package="fr.imerir.yora">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".infrastructure.YoraApplication"
@@ -29,9 +30,16 @@
 
         <activity android:name=".activities.ContactsActivity"/>
 
+        <activity android:name=".activities.ContactActivity" />
+
+        <activity android:name=".activities.AddContactActivity" />
+
         <activity android:name=".activities.SentMessagesActivity"/>
 
+        <activity android:name=".activities.AuthenticationActivity" />
+
         <activity android:name="com.soundcloud.android.crop.CropImageActivity" />
+
 
     </application>
 

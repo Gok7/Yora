@@ -5,12 +5,14 @@ import android.os.Bundle;
 
 import com.squareup.otto.Bus;
 
+import fr.imerir.yora.infrastructure.ActionScheduler;
 import fr.imerir.yora.infrastructure.YoraApplication;
 
 public class BaseDialogFragment extends DialogFragment {
 
     protected YoraApplication application;
     protected Bus bus;
+    protected ActionScheduler scheduler;
 
     @Override
     public void onCreate(Bundle savedState) {
@@ -26,5 +28,17 @@ public class BaseDialogFragment extends DialogFragment {
     public void onDestroy() {
         super.onDestroy();
         bus.unregister(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        scheduler.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        scheduler.onPause();
     }
 }

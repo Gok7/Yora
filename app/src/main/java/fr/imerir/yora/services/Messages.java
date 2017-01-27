@@ -23,11 +23,11 @@ public final class Messages {
     }
 
     public static class SearchMessagesRequest {
-        public String fromContactId;
+        public int fromContactId;
         public boolean includeSentMessages;
         public boolean includeReceivedMessages;
 
-        public SearchMessagesRequest(String fromContactId, boolean includeSentMessages, boolean includeReceivedMessages) {
+        public SearchMessagesRequest(int fromContactId, boolean includeSentMessages, boolean includeReceivedMessages) {
             this.fromContactId = fromContactId;
             this.includeSentMessages = includeSentMessages;
             this.includeReceivedMessages = includeReceivedMessages;

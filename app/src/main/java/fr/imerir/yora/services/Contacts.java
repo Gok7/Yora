@@ -60,4 +60,50 @@ public final class Contacts {
     public static class RespondToContactRequestResponse extends ServiceResponse {
 
     }
+
+    public static class RemoveContactRequest {
+        public int contactId;
+
+        public RemoveContactRequest(int contactId) {
+            this.contactId = contactId;
+        }
+    }
+
+    public static class RemoveContactResponse extends ServiceResponse {
+        public int RemovedContactId;
+    }
+
+    public static class SearchUsersRequest {
+
+        public String query;
+
+        public SearchUsersRequest(String query) {
+            this.query = query;
+        }
+    }
+
+    public static class SearchUsersResponse extends ServiceResponse {
+        public List<UserDetails> users;
+        public String query;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

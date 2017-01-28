@@ -8,21 +8,21 @@ public class UserDetails implements Parcelable {
 
     public static final Creator<UserDetails> CREATOR = new Creator<UserDetails>() {
         @Override
-        public UserDetails createFromParcel(Parcel parcel) {
+        public UserDetails createFromParcel(Parcel source) {//reading data
 
-            return new UserDetails(0, false, null, null, null);
+            return new UserDetails(source);
         }
 
         @Override
-        public UserDetails[] newArray(int i) {
-            return new UserDetails[0];
+        public UserDetails[] newArray(int size) {
+            return new UserDetails[size];
         }
     };
-    private int id;
-    private boolean isContact;
-    private String displayName;
-    private String userName;
-    private String avatarUrl;
+    private final int id;
+    private final boolean isContact;
+    private final String displayName;
+    private final String userName;
+    private final String avatarUrl;
 
     public UserDetails(int id, boolean isContact, String displayName, String userName, String avatarUrl) {
         this.id = id;
@@ -30,6 +30,30 @@ public class UserDetails implements Parcelable {
         this.displayName = displayName;
         this.userName = userName;
         this.avatarUrl = avatarUrl;
+    }
+
+    private UserDetails(Parcel parcel) {
+
+        id = parcel.readInt();
+        isContact = parcel.readByte() == 1;
+        displayName = parcel.readString();
+        userName = parcel.readString();
+        avatarUrl = parcel.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel destination, int flags) {//saving data
+
+        destination.writeInt(id);
+        destination.writeByte((byte) (isContact ? 1 : 0));
+        destination.writeString(displayName);
+        destination.writeString(userName);
+        destination.writeString(avatarUrl);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public int getId() {
@@ -52,13 +76,4 @@ public class UserDetails implements Parcelable {
         return avatarUrl;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-
-    }
 }

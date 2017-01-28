@@ -4,17 +4,18 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Message implements Parcelable {
     public static final Creator<Message> CREATOR = new Creator<Message>() {
         @Override
-        public Message createFromParcel(Parcel parcel) {
-            return null;
+        public Message createFromParcel(Parcel source) {
+            return new Message(source);
         }
 
         @Override
-        public Message[] newArray(int i) {
-            return new Message[0];
+        public Message[] newArray(int size) {
+            return new Message[size];
         }
     };
     private int id;
@@ -38,6 +39,38 @@ public class Message implements Parcelable {
         this.isFromUs = isFromUs;
         this.isRead = isRead;
     }
+
+    private Message(Parcel in) {
+        id = in.readInt();
+        createdAt = new GregorianCalendar();
+        createdAt.setTimeInMillis(in.readLong());
+        shortMessage = in.readString();
+        longMessage = in.readString();
+        imageUrl = in.readString();
+        otherUser = in.readParcelable(UserDetails.class.getClassLoader());
+        isFromUs = in.readByte() == 1;
+        isRead = in.readByte() == 1;
+
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(id);
+        out.writeLong(createdAt.getTimeInMillis());
+        out.writeString(shortMessage);
+        out.writeString(longMessage);
+        out.writeString(imageUrl);
+        out.writeParcelable(otherUser, 0);
+        out.writeByte((byte) (isFromUs ? 1 : 0));
+        out.writeByte((byte) (isRead ? 1 : 0));
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
 
     public int getId() {
         return id;
@@ -79,13 +112,4 @@ public class Message implements Parcelable {
         isSelected = selected;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-
-    }
 }

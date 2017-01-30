@@ -52,8 +52,11 @@
 
         <activity android:name=".activities.SelectContactActivity" />
 
-
         <activity android:name=".activities.SentMessagesActivity" />
+
+        <activity
+            android:name=".activities.SendMessageActivity"
+            android:exported="true" />
 
         <activity android:name=".activities.AuthenticationActivity" />
 

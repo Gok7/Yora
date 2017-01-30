@@ -40,7 +40,9 @@ public class SelectContactActivity extends BaseAuthenticatedActivity implements 
     public void onContactsReceived(Contacts.GetContactsResponse response) {
         response.showErrorToast(this);
 
-        progressFrame.setVisibility(View.GONE);
+        if (progressFrame != null) {
+            progressFrame.setVisibility(View.GONE);
+        }
 
         adapter.clear();
         adapter.addAll(response.Contacts);

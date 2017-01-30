@@ -8,4 +8,6 @@
     <color name="list_item_message_background_selected">#8c9efe</color>
     <color name="list_item_message_background">#eee</color>
     <color name="list_item_message_background_unread">#fff2cf</color>
+    <color name="control_background">#cc4285f4</color>
+
 </resources>

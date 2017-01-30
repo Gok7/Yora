@@ -4,5 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageButton
+        android:id="@+id/activity_new_message_takePicture"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/round_button"
+        android:padding="5dp"
+        android:src="@drawable/ic_action_camera" />
+
+    <ImageButton
+        android:id="@+id/activity_new_message_switchCamera"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_gravity="bottom|start"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/round_button"
+        android:padding="5dp"
+        android:src="@drawable/ic_action_camera_switch" />
 
 </FrameLayout>

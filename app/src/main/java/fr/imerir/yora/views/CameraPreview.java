@@ -28,9 +28,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
         if (this.camera != null) {
             try {
-                if (camera == this.camera) {
-                    return;
-                }
                 this.camera.stopPreview();
             } catch (Exception e) {
                 Log.e(TAG, "Could not stop camera preview", e);
@@ -39,6 +36,10 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
         this.camera = camera;
         this.cameraInfo = cameraInfo;
+
+        if (camera == null) {
+            return;
+        }
 
         if (!isSurfaceCreated) {
             return;
@@ -49,7 +50,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
             configureCamera();
             camera.startPreview();
         } catch (Exception e) {
-
             Log.e(TAG, "Could not start camera preview", e);
         }
     }

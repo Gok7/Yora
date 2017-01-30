@@ -25,7 +25,10 @@ import fr.imerir.yora.views.MessagesAdapter;
 
 public class ContactActivity extends BaseAuthenticatedActivity implements MessagesAdapter.OnMessageClickedListener {
     public static final String EXTRA_USER_DETAILS = "EXTRA_USER_DETAILS";
-    public static final int RESULT_USER_REMOVED = 100;
+    public static final int RESULT_USER_REMOVED = 101;
+
+    private static final int REQUEST_SEND_MESSAGE = 1;
+
     private UserDetails userDetails;
     private MessagesAdapter adapter;
     private ArrayList<Message> messages;
@@ -137,7 +140,7 @@ public class ContactActivity extends BaseAuthenticatedActivity implements Messag
         if (id == R.id.activity_contact_menuNewMessage) {
             Intent intent = new Intent(this, NewMessageActivity.class);
             intent.putExtra(NewMessageActivity.EXTRA_CONTACT, userDetails);
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_SEND_MESSAGE);
             return true;
         }
         if (id == R.id.activity_contact_menuRemoveFriend) {
@@ -156,6 +159,14 @@ public class ContactActivity extends BaseAuthenticatedActivity implements Messag
             return true;
         }
         return false;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_SEND_MESSAGE && resultCode == RESULT_OK) {
+            progressFrame.setVisibility(View.VISIBLE);
+            bus.post(new Messages.SearchMessagesRequest(userDetails.getId(), true, true));
+        }
     }
 }
 

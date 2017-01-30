@@ -23,7 +23,7 @@ public class InMemoryContactsService extends BaseInMemoryService {
 
         for (int i = 0; i < 3; i++) {
             response.requests.add(
-                    new ContactRequest(i,
+                    new ContactRequest(
                             request.fromUs,
                             createFakeUser(i, false)
                             , new GregorianCalendar()));

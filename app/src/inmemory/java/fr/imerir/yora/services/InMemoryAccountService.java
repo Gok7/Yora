@@ -84,7 +84,7 @@ public class InMemoryAccountService extends BaseInMemoryService {
                     response.setPropertyError("userName", "Invalid username or password");
 
                 //must be invoked first, so auth token has been set before we respond in a positive way
-                loginUser(response);
+                loginUser(new Account.UserResponse());
                 bus.post(response);
             }
         }, 1000, 2000);
@@ -163,5 +163,10 @@ public class InMemoryAccountService extends BaseInMemoryService {
         response.avatarUrl = user.getAvatarUrl();
         response.id = user.getId();
         response.authToken = auth.getAuthToken();
+    }
+
+    @Subscribe
+    public void updateGcmRegistration(Account.UpdateGcmRegistrationRequest request) {
+        postDelayed(new Account.UpdateUpdateGcmRegistrationResponse());
     }
 }

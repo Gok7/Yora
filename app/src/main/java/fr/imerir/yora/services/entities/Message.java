@@ -18,6 +18,7 @@ public class Message implements Parcelable {
             return new Message[size];
         }
     };
+    public boolean isRead;
     private int id;
     private Calendar createdAt;
     private String shortMessage;
@@ -25,7 +26,6 @@ public class Message implements Parcelable {
     private String imageUrl;
     private UserDetails otherUser;
     private boolean isFromUs;
-    private boolean isRead;
     private boolean isSelected;
 
     public Message(int id, Calendar createdAt, String shortMessage, String longMessage,
@@ -102,6 +102,10 @@ public class Message implements Parcelable {
 
     public boolean isRead() {
         return isRead;
+    }
+
+    public void setIsRead(boolean isRead) {
+        this.isRead = isRead;
     }
 
     public boolean isSelected() {

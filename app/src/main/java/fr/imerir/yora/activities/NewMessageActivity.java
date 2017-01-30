@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 import fr.imerir.yora.R;
+import fr.imerir.yora.services.entities.Message;
 import fr.imerir.yora.services.entities.UserDetails;
 import fr.imerir.yora.views.CameraPreview;
 
@@ -204,6 +205,12 @@ public class NewMessageActivity extends BaseAuthenticatedActivity implements Vie
         if (requestCode == REQUEST_SEND_MESSAGE && resultCode == RESULT_OK) {
             setResult(RESULT_OK);
             finish();
+
+            Message message = data.getParcelableExtra(SendMessageActivity.RESULT_MESSAGE);
+
+            Intent intent = new Intent(this, MessageActivity.class);
+            intent.putExtra(MessageActivity.EXTRA_MESSAGE, message);
+            startActivity(intent);
         }
     }
 }

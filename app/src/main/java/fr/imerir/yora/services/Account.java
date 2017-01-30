@@ -37,7 +37,7 @@ public final class Account {
         }
     }
 
-    public static class LoginWithUserNameResponse extends UserResponse {
+    public static class LoginWithUserNameResponse extends ServiceResponse {
     }
 
     public static class LoginWithLocalTokenRequest {
@@ -125,6 +125,8 @@ public final class Account {
     }
 
     public static class ChangeAvatarResponse extends ServiceResponse {
+        public String avatarUrl;
+
     }
 
     public static class UpdateProfileRequest {
@@ -139,6 +141,8 @@ public final class Account {
     }
 
     public static class UpdateProfileResponse extends ServiceResponse {
+        public String displayName;
+        public String email;
     }
 
     public static class ChangePasswordRequest {
@@ -162,10 +166,23 @@ public final class Account {
     //example : change user avatar, we let the system know that that happened.
     public static class UserDetailsUpdatedEvent {
 
-        public User user;
+        public User User;
 
         public UserDetailsUpdatedEvent(User user) {
-            this.user = user;
+            this.User = user;
         }
+    }
+
+    public static class UpdateGcmRegistrationRequest {
+
+        public String RegistrationId;
+
+        public UpdateGcmRegistrationRequest(String registrationId) {
+            this.RegistrationId = registrationId;
+        }
+    }
+
+    public static class UpdateUpdateGcmRegistrationResponse extends ServiceResponse {
+
     }
 }

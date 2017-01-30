@@ -49,8 +49,8 @@ public class MainNavDrawer extends NavDrawer {
     @Subscribe
     public void onUserDetailsUpdated(Account.UserDetailsUpdatedEvent event) {
 
-        Picasso.with(activity).load(event.user.getAvatarUrl()).into(avatarImage);
-        displayNameText.setText(event.user.getDisplayName());
+        Picasso.with(activity).load(event.User.getAvatarUrl()).into(avatarImage);
+        displayNameText.setText(event.User.getDisplayName());
     }
 }
 

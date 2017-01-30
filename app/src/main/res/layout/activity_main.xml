@@ -4,19 +4,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <include layout="@layout/include_toolbar" />
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/include_toolbar" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello World" />
-    </LinearLayout>
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/include_toolbar">
 
-    <include layout="@layout/include_main_nav_drawer"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/activity_main_recyclerView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <ImageButton
+            android:id="@+id/activity_main_newMessageButton"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/round_button"
+            android:padding="5dp"
+            android:src="@drawable/ic_action_camera" />
+
+    </RelativeLayout>
+
+    <include layout="@layout/include_main_nav_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

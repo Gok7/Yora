@@ -94,14 +94,13 @@ public class ProfileActivity extends BaseAuthenticatedActivity implements View.O
         if (isProgressBarVisible) {
             setProgressBarVisible(true);
         }
-
     }
 
     @Subscribe
     public void onUserDetailsUpdated(Account.UserDetailsUpdatedEvent event) {
 
-        getSupportActionBar().setTitle(event.user.getDisplayName());
-        Picasso.with(this).load(event.user.getAvatarUrl()).into(avatarView);
+        getSupportActionBar().setTitle(event.User.getDisplayName());
+        Picasso.with(this).load(event.User.getAvatarUrl()).into(avatarView);
     }
 
     @Override

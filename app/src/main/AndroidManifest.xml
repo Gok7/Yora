@@ -36,7 +36,8 @@
 
         <activity
             android:name=".activities.NewMessageActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
 
         <activity android:name=".activities.ContactsActivity" />
 

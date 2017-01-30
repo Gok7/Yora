@@ -20,6 +20,7 @@ import android.widget.RelativeLayout;
 
 import com.soundcloud.android.crop.Crop;
 import com.squareup.otto.Subscribe;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -80,6 +81,7 @@ public class ProfileActivity extends BaseAuthenticatedActivity implements View.O
 
         User user = application.getAuth().getUser();
         getSupportActionBar().setTitle(user.getDisplayName());
+        Picasso.with(this).load(user.getAvatarUrl()).into(avatarView);
 
         if (savedState == null) {
             displayNameText.setText(user.getDisplayName());
@@ -99,6 +101,7 @@ public class ProfileActivity extends BaseAuthenticatedActivity implements View.O
     public void onUserDetailsUpdated(Account.UserDetailsUpdatedEvent event) {
 
         getSupportActionBar().setTitle(event.user.getDisplayName());
+        Picasso.with(this).load(event.user.getAvatarUrl()).into(avatarView);
     }
 
     @Override
@@ -154,20 +157,22 @@ public class ProfileActivity extends BaseAuthenticatedActivity implements View.O
         //two conditions : number 1 : user selected an image from device
         //number 2 : user took an image
         if (requestCode == REQUEST_SELECT_IMAGE) {
-            Uri outputFile;
+            Uri outputFile = null;
             Uri tempFileUri = Uri.fromFile(tempOutputFile);
 
             //detect if user selected image or took a picture
-            if (data != null &&
-                    (data.getAction() != null ||
-                            !data.getAction().equals(MediaStore.ACTION_IMAGE_CAPTURE)))
-                outputFile = data.getData();    //user selected image
-
-            else
+            if (data != null && (data.getAction() != null)) {
+                if (!data.getAction().equals(MediaStore.ACTION_IMAGE_CAPTURE)) {
+                    outputFile = data.getData();    //user selected image
+                }
+            } else if (data.getAction().equals(MediaStore.ACTION_IMAGE_CAPTURE)) {
                 outputFile = tempFileUri;       //user took a picture
+            }
 
-            //crop image and start new soundcloud activity
-            new Crop(outputFile).asSquare().output(tempFileUri).start(this);
+            if (outputFile != null) {
+                new Crop(outputFile).asSquare().output(tempFileUri).start(this);
+            }            //crop image and start new soundcloud activity
+
         } else if (requestCode == Crop.REQUEST_CROP) {
 
             //todo : send tempsFileUri to server as new avatar

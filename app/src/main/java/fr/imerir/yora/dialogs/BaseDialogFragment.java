@@ -19,8 +19,9 @@ public class BaseDialogFragment extends DialogFragment {
 
         super.onCreate(savedState);
         application = (YoraApplication) getActivity().getApplication();
-        bus = application.getBus();
+        scheduler = new ActionScheduler(application);
 
+        bus = application.getBus();
         bus.register(this);
     }
 

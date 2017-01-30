@@ -11,7 +11,7 @@ import fr.imerir.yora.activities.BaseActivity;
 
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
     private static final String TAG = "CameraPreview";
-    private final SurfaceHolder surfaceHolder;
+    private SurfaceHolder surfaceHolder;
     private Camera camera;
     private Camera.CameraInfo cameraInfo;
     private boolean isSurfaceCreated;
@@ -56,6 +56,11 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
+
+        if (this.surfaceHolder != surfaceHolder) {
+            this.surfaceHolder = surfaceHolder;
+            this.surfaceHolder.addCallback(this);
+        }
         isSurfaceCreated = true;
 
         if (camera != null) {
@@ -70,11 +75,18 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-        if (camera == null || surfaceHolder.getSurface() == null) {
+
+        isSurfaceCreated = false;
+        surfaceHolder.removeCallback(this);
+        surfaceHolder = null;
+
+        if (camera == null) {
             return;
         }
         try {
             camera.stopPreview();
+            camera = null;
+            cameraInfo = null;
         } catch (Exception e) {
             Log.e(TAG, "Can't stop preview", e);
         }

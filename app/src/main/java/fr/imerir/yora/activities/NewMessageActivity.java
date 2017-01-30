@@ -76,7 +76,7 @@ public class NewMessageActivity extends BaseAuthenticatedActivity implements Vie
 
         Bitmap bitmap = processBitmap(data);
         ByteArrayOutputStream output = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, output);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, output);
 
         File outputFile = new File(getCacheDir(), "temp-image");
         outputFile.delete();

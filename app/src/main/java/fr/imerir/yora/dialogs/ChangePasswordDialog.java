@@ -31,7 +31,7 @@ public class ChangePasswordDialog extends BaseDialogFragment implements View.OnC
         confirmNewPassword = (EditText) dialogView.findViewById(R.id.dialog_change_password_confirmNewPassword);
 
         //if they don't have a password on their account, don't ask for current password
-        if (!application.getAuth().getUser().isHasPassword()) {
+        if (!application.getAuth().getUser().hasPassword()) {
             currentPassword.setVisibility(View.GONE);
         }
 

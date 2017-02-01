@@ -7,8 +7,9 @@ import android.view.View;
 
 import fr.imerir.yora.R;
 import fr.imerir.yora.fragments.LoginFragment;
+import fr.imerir.yora.fragments.RegisterGcmFragment;
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener,LoginFragment.Callbacks {
+public class LoginActivity extends BaseActivity implements View.OnClickListener, LoginFragment.Callbacks {
 
     private static final int REQUEST_NARROW_LOGIN = 1;
     private static final int REQUEST_REGISTER = 2;
@@ -20,7 +21,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
 
     @Override
-    protected void onCreate(Bundle savedState){
+    protected void onCreate(Bundle savedState) {
         super.onCreate(savedState);
 
         setContentView(R.layout.activity_login);
@@ -30,7 +31,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         facebookLoginButton = findViewById(R.id.activity_login_facebook);
         googleLoginButton = findViewById(R.id.activity_login_google);
 
-        if(loginButton != null){
+        if (loginButton != null) {
             loginButton.setOnClickListener(this);
         }
 
@@ -43,16 +44,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void onClick(View view) {
-        if(view == loginButton){
-            startActivityForResult(new Intent(this,LoginNarrowActivity.class), REQUEST_NARROW_LOGIN);
-        }
-        else if(view == registerButton){
-            startActivityForResult(new Intent(this, RegisterActivity.class),REQUEST_REGISTER);
-        }
-        else if(view == googleLoginButton){
+        if (view == loginButton) {
+            startActivityForResult(new Intent(this, LoginNarrowActivity.class), REQUEST_NARROW_LOGIN);
+        } else if (view == registerButton) {
+            startActivityForResult(new Intent(this, RegisterActivity.class), REQUEST_REGISTER);
+        } else if (view == googleLoginButton) {
             doExternalLogin("Google");
-        }
-        else if(view == facebookLoginButton){
+        } else if (view == facebookLoginButton) {
             doExternalLogin("Facebook");
         }
 
@@ -60,23 +58,27 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     private void doExternalLogin(String externalService) {
 
-        Intent intent = new Intent(this,ExternalLoginActivity.class);
-        intent.putExtra(ExternalLoginActivity.EXTRA_EXTERNAL_SERVICE,externalService);
-        startActivityForResult(intent,REQUEST_EXTERNAL_LOGIN);
+        Intent intent = new Intent(this, ExternalLoginActivity.class);
+        intent.putExtra(ExternalLoginActivity.EXTRA_EXTERNAL_SERVICE, externalService);
+        startActivityForResult(intent, REQUEST_EXTERNAL_LOGIN);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        if(resultCode != RESULT_OK){
+        if (resultCode != RESULT_OK) {
             return;
         }
-        if(requestCode == REQUEST_NARROW_LOGIN ||
+        if (requestCode == REQUEST_NARROW_LOGIN ||
                 requestCode == REQUEST_REGISTER ||
-                requestCode == REQUEST_EXTERNAL_LOGIN){
-            finishLogin();
+                requestCode == REQUEST_EXTERNAL_LOGIN) {
+            RegisterGcmFragment.get(new RegisterGcmFragment.GcmRegistrationCallback() {
+                @Override
+                public void gcmFinished() {
+                    finishLogin();
+                }
+            }, requestCode == REQUEST_REGISTER, getFragmentManager());
         }
-
     }
 
     private void finishLogin() {

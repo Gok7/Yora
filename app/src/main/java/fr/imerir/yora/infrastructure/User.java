@@ -53,7 +53,7 @@ public class User {
         isLoggedIn = loggedIn;
     }
 
-    public boolean isHasPassword() {
+    public boolean hasPassword() {
         return hasPassword;
     }
 

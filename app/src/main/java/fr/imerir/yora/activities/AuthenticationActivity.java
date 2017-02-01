@@ -8,10 +8,11 @@ import android.widget.Toast;
 import com.squareup.otto.Subscribe;
 
 import fr.imerir.yora.R;
+import fr.imerir.yora.fragments.RegisterGcmFragment;
 import fr.imerir.yora.infrastructure.Auth;
 import fr.imerir.yora.services.Account;
 
-public class AuthenticationActivity extends BaseActivity {
+public class AuthenticationActivity extends BaseActivity implements RegisterGcmFragment.GcmRegistrationCallback {
 
     public static final String EXTRA_RETURN_TO_ACTIVITY = "EXTRA_RETURN_TO_ACTIVITY";
     private Auth auth;
@@ -44,7 +45,11 @@ public class AuthenticationActivity extends BaseActivity {
             return;
         }
 
-        //we need to go back to activity that started this activity
+        RegisterGcmFragment.get(this, false, getFragmentManager());
+    }
+
+    @Override
+    public void gcmFinished() {
 
         Intent intent;
         String returnTo = getIntent().getStringExtra(EXTRA_RETURN_TO_ACTIVITY);
@@ -60,5 +65,6 @@ public class AuthenticationActivity extends BaseActivity {
         }
         startActivity(intent);
         finish();
+
     }
 }

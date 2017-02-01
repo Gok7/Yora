@@ -8,6 +8,14 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <permission
+        android:name="fr.imerir.yora.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="fr.imerir.yora.permission.C2D_MESSAGE" />
+
     <application
         android:name=".infrastructure.YoraApplication"
         android:allowBackup="true"

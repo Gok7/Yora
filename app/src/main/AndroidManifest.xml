@@ -24,6 +24,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <receiver
+            android:name=".receivers.NotificationReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+
+            <intent-filter>
+
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="fr.imerir.yora" />
+
+            </intent-filter>
+
+        </receiver>
+
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

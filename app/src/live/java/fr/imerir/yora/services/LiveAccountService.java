@@ -143,7 +143,9 @@ public class LiveAccountService extends BaseLiveService {
                 (Account.LoginWithExternalTokenResponse.class, bus) {
             @Override
             protected void onResponse(Account.LoginWithExternalTokenResponse response) {
-                loginUser(response);
+                if (response.didSucceed()) {
+                    loginUser(response);
+                }
                 super.onResponse(response);
             }
         });
@@ -156,7 +158,10 @@ public class LiveAccountService extends BaseLiveService {
                 (Account.RegisterWithExternalTokenResponse.class, bus) {
             @Override
             protected void onResponse(Account.RegisterWithExternalTokenResponse response) {
-                loginUser(response);
+
+                if (response.didSucceed()) {
+                    loginUser(response);
+                }
                 super.onResponse(response);
             }
         });

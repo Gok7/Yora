@@ -19,7 +19,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private View facebookLoginButton;
     private View googleLoginButton;
 
-
     @Override
     protected void onCreate(Bundle savedState) {
         super.onCreate(savedState);

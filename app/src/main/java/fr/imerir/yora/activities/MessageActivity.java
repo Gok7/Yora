@@ -21,6 +21,7 @@ import com.squareup.otto.Subscribe;
 import java.util.GregorianCalendar;
 
 import fr.imerir.yora.R;
+import fr.imerir.yora.services.Events;
 import fr.imerir.yora.services.Messages;
 import fr.imerir.yora.services.entities.Message;
 import fr.imerir.yora.services.entities.UserDetails;
@@ -257,6 +258,20 @@ public class MessageActivity extends BaseAuthenticatedActivity implements View.O
         currentAnimation.play(translateAnimator).with(colorAnimator);
         currentAnimation.start();
 
+    }
+
+    @Subscribe
+    public void onNotification(Events.OnNotificationReceivedEvent event) {
+
+        if (currentMessage == null) {
+            return;
+        }
+        if (event.operationType == Events.OPERATION_DELETED &&
+                event.entityType == Events.ENTITY_MESSAGE &&
+                event.entityId == currentMessage.getId()) {
+
+            closeMessage(REQUEST_IMAGE_DELETED);
+        }
     }
 }
 

@@ -8,11 +8,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <Button
+    <FrameLayout
+        android:id="@+id/activity_external_login_progressFrame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Test log in "
-        android:layout_gravity="bottom"
-        android:id="@+id/activity_external_login_testButton"/>
+        android:layout_height="match_parent"
+        android:background="#2196F3"
+        android:clickable="true"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateOnly="true" />
+
+    </FrameLayout>
 
 </FrameLayout>
